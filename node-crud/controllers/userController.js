@@ -1,28 +1,28 @@
 const userModel = require('../models/userModel');
 
 // get all users
-const getAllUsers = (req, res) => {
-  const users = userModel.findAll();
-
+const getAllUsers = async (req, res) => {
+  const users = await userModel.findAll();
+  
   res.json(users);
 
 };
 
 // get by id
-const getUserById = (req, res) => {
+const getUserById = async (req, res) => {
   const id = req.params.id;
 
-  const user = userModel.findById(id);
+  const user = await userModel.findById(id);
 
   res.json(user);
 
 };
 
 // create user
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
   const user = req.body;
 
-  userModel.createUser(user);
+  await userModel.createUser(user);
 
   res.json({
     message: 'user created'
@@ -30,11 +30,11 @@ const createUser = (req, res) => {
 };
 
 // update user
-const updateUser = (req, res) => {
+const updateUser = async (req, res) => {
   const id = req.params.id;
   const updatedUser = req.body;
 
-  userModel.update(id, updateUser);
+  await userModel.update(id, updatedUser);
 
   res.json({
     message: 'user updated'
@@ -42,10 +42,10 @@ const updateUser = (req, res) => {
 };
 
 //delete user
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
   const id = req.params.id;
 
-  userModel.remove(id);
+  await userModel.remove(id);
 
   res.json({
     message: 'user deleted'

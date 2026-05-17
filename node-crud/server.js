@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 // routes
-app.user("/users", userRoutes);
+app.use("/users", userRoutes);
 
 const PORT = 3000;
 

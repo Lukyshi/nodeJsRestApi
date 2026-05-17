@@ -1,48 +1,43 @@
-let users = [
-
-  {
-    id: 1,
-    name: 'luiz bangsoy',
-    email: 'luizbangsoy@gmail.com'
-  },
-
-    {
-    id: 2,
-    name: 'kailee yshi',
-    email: 'kaileeyshi@gmail.com'
-  },
-
-];
+const prisma = require("../config/prisma");
 
 // read all
-const findAll = () => {
-  return users;
+const findAll = async () => {
+  return await prisma.user.findMany();
 };
 
 // read by id
-const findById = (id) => {
-  return users.find(user => user.id === id);
+const findById = async (id) => {
+  return await prisma.user.findUnique({
+    where: {
+      id: parseInt(id)
+    }
+  });
 };
 
 // create user
-const create = (user) => {
-  users.push(user);
+const create = async(user) => {
+  return await prisma.user.create({
+    data: user
+  });
 };
 
 //update
-const update =(id, updatedUser) => {
-  const index = users.findIndex(
-    user => user.id === id
-  );
-
-  users[index] = updatedUser;
+const update = async(id, updatedUser) => {
+  return await prisma.user.update({
+    where: {
+      id: parseInt(id)
+    },
+    data: updatedUser
+  });
 };
 
 // delete
-const remove = (id) => {
-  users = users.filter(
-    user => user.id != id
-  );
+const remove = async(id) => {
+  return await prisma.user.delete({
+    where: {
+      id: Number(id)
+    }
+  });
 };
 
 module.exports = {
